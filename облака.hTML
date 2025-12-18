@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use in the Sky - MK Space Industries</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Сброс стилей и базовые настройки */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+            line-height: 1.6;
+            padding-top: 80px; /* Отступ для фиксированного верхнего баннера */
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Многослойный фон с облаками и градиентом */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                /* Основной градиент неба */
+                linear-gradient(180deg, #87CEEB 0%, #B0E2FF 50%, #E0F7FF 100%),
+                /* Облака */
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="white" opacity="0.7" d="M25,60 Q30,55 35,60 Q40,65 45,60 Q50,55 55,60 Q60,65 65,60 Q70,55 75,60 Q80,65 85,60 Q90,55 95,60 L95,100 L5,100 L5,60 Q10,65 15,60 Q20,55 25,60 Z"/></svg>'),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100" viewBox="0 0 150 100"><path fill="white" opacity="0.5" d="M10,70 Q20,60 30,70 Q40,80 50,70 Q60,60 70,70 Q80,80 90,70 Q100,60 110,70 Q120,80 130,70 Q140,60 150,70 L150,100 L0,100 L0,70 Q5,80 15,70 Q20,60 30,70 Z"/></svg>');
+            background-size: auto, 200px 120px, 300px 150px;
+            background-position: 0 0, 0 50%, 100px 30%;
+            background-blend-mode: normal, overlay, overlay;
+            z-index: -2;
+            animation: cloudMove 60s linear infinite;
+        }
+        
+        /* Анимация движения облаков */
+        @keyframes cloudMove {
+            0% {
+                background-position: 0 0, 0 50%, 100px 30%;
+            }
+            100% {
+                background-position: 0 0, 200px 50%, -200px 30%;
+            }
+        }
+        
+        /* Дополнительный слой с летающими объектами */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="20" viewBox="0 0 50 20"><path fill="%23ffffff" opacity="0.3" d="M5,10 L45,10 L40,5 L45,10 L40,15 Z"/></svg>'),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="8" fill="%23ffffff" opacity="0.2"/></svg>');
+            background-size: 50px 20px, 30px 30px;
+            background-position: 10% 20%, 90% 70%;
+            background-repeat: no-repeat;
+            z-index: -1;
+            animation: floating 40s ease-in-out infinite;
+        }
+        
+        /* Анимация парящих объектов */
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+            50% {
+                transform: translateY(10px) translateX(-10px);
+            }
+            75% {
+                transform: translateY(-10px) translateX(5px);
+            }
+        }
+        
+        /* Верхний фиксированный баннер */
+        .top-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(90deg, #1E90FF, #87CEEB);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .top-banner h1 {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Контейнер для основного контента */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Секции с контентом */
+        .content-section {
+            display: flex;
+            margin-bottom: 50px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .content-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .text-block, .image-block {
+            flex: 1;
+            padding: 30px;
+        }
+        
+        .text-block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .image-block {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(248, 249, 250, 0.7);
+        }
+        
+        /* Стили для изображений */
+        .content-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease;
+        }
+        
+        .content-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #1E90FF;
+            font-weight: 600;
+        }
+        
+        .section-text {
+            font-size: 1.1rem;
+            color: #495057;
+            line-height: 1.7;
+        }
+        
+        /* Контейнер для кнопок навигации */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding: 0 20px;
+        }
+        
+        /* Стили для кнопок */
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 35px;
+            background: linear-gradient(135deg, #1E90FF, #00BFFF);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(30, 144, 255, 0.4);
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+        }
+        
+        .nav-button:hover::before {
+            left: 100%;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 144, 255, 0.6);
+            background: linear-gradient(135deg, #00BFFF, #1E90FF);
+        }
+        
+        .nav-button:active {
+            transform: translateY(1px);
+        }
+        
+        .prev-button {
+            background: linear-gradient(135deg, #6c757d, #adb5bd);
+        }
+        
+        .prev-button:hover {
+            background: linear-gradient(135deg, #adb5bd, #6c757d);
+            box-shadow: 0 8px 20px rgba(108, 117, 125, 0.6);
+        }
+        
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .content-section {
+                flex-direction: column;
+            }
+            
+            .text-block, .image-block {
+                padding: 20px;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-button {
+                width: 100%;
+                text-align: center;
+            }
+            
+            body::before {
+                animation: cloudMoveMobile 80s linear infinite;
+            }
+            
+            @keyframes cloudMoveMobile {
+                0% {
+                    background-position: 0 0, 0 50%, 100px 30%;
+                }
+                100% {
+                    background-position: 0 0, 300px 50%, -300px 30%;
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Верхний фиксированный баннер высотой 80px -->
+    <header class="top-banner">
+        <h1>Use in the sky</h1>
+    </header>
+    
+    <div class="container">
+        <!-- Первая секция: текст -->
+        <section class="content-section">
+            <div class="text-block">
+                <h2 class="section-title">MODERN AVIATION</h2>
+                <p class="section-text">
+                    Modern passenger aircraft, such as the Boeing 787 Dreamliner, represent the pinnacle of engineering
+                    They are equipped with cutting-edge technologies that ensure passenger comfort and flight efficiency
+                    This is achieved through the use of sensors and GPS systems that rely on our satellites.
+                </p>
+            </div>
+            <div class="image-block">
+                <!-- ЗАМЕНИТЕ ССЫЛКУ НИЖЕ НА ВАШЕ ИЗОБРАЖЕНИЕ #1 -->
+                <img src="https://avatars.mds.yandex.net/i?id=ad2849265feef24c1c4755f0110f8fac63b265f2-16324058-images-thumbs&n=13" 
+                     alt="Modern aircraft with satellite technology" class="content-image">
+            </div>
+        </section>
+        
+        <!-- Вторая секция: изображение -->
+        <section class="content-section">
+            <div class="image-block">
+                <!-- ЗАМЕНИТЕ ССЫЛКУ НИЖЕ НА ВАШЕ ИЗОБРАЖЕНИЕ #2 -->
+                <img src="https://avatars.mds.yandex.net/i?id=2a0000019a9a35834a2b0cc44f5146e8bfcf-1386561-fast-images&n=13" 
+                     alt="Aircraft safety systems" class="content-image">
+            </div>
+            <div class="text-block">
+                <h2 class="section-title">FIIGHT SAFETY</h2>
+                <p class="section-text">
+                    Safety is the number one priority in aviation
+                    Modern aircraft are equipped with a variety of systems that ensure flight safety even in challenging conditions 
+                    And thanks to our satellites, aircraft will rarely collide with each other
+                </p>
+            </div>
+        </section>
+        
+        <!-- Третья секция: текст -->
+        <section class="content-section">
+            <div class="text-block">
+                <h2 class="section-title">SHIPPING</h2>
+                <p class="section-text">
+                    The maritime industry cannot do without
+                    geolocation forecasts of storms and hurricanes
+                    and without satellites and the space industry, none of this would be possible.
+                </p>
+            </div>
+            <div class="image-block">
+                <!-- ЗАМЕНИТЕ ССЫЛКУ НИЖЕ НА ВАШЕ ИЗОБРАЖЕНИЕ #3 -->
+                <img src="https://avatars.mds.yandex.net/i?id=9fb083a12f5a4551e80952d7a045ba3308c44224-5231332-images-thumbs&n=13" 
+                     alt="Maritime shipping with satellite navigation" class="content-image">
+            </div>
+        </section>
+        
+        <!-- Четвертая секция: изображение -->
+        <section class="content-section">
+            <div class="image-block">
+                <!-- ЗАМЕНИТЕ ССЫЛКУ НИЖЕ НА ВАШЕ ИЗОБРАЖЕНИЕ #4 -->
+                <img src="https://avatars.mds.yandex.net/i?id=0cb0f5d92991c70833370631f37d7920fe84f9fd-10511855-images-thumbs&n=13" 
+                     alt="Satellite effectiveness" class="content-image">
+            </div>
+            <div class="text-block">
+                <h2 class="section-title">EFFECTIVENESS</h2>
+                <p class="section-text">
+                    Despite their relatively low cost
+                    satellites are incredibly effective devices that can quickly pay for themselves.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Кнопки навигации -->
+        <div class="button-container">
+            <a href="MK Space Industries.HTML" class="nav-button prev-button">⬆️To the stars⬆️</a>
+            <a href="земля.HTML" class="nav-button">⬇️From sky to earth⬇️</a>
+        </div>
+    </div>
+    
+    <script>
+        // Простой скрипт для добавления интерактивности
+        document.addEventListener('DOMContentLoaded', function() {
+            // Добавляем плавное появление секций при загрузке страницы
+            const sections = document.querySelectorAll('.content-section');
+            
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, 200 * index);
+            });
+            
+            // Добавляем эффект параллакса для фона при прокрутке
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                document.body.style.backgroundPosition = `0 ${scrolled * 0.5}px`;
+            });
+        });
+    </script>
+</body>
+</html>

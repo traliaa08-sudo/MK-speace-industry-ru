@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MK Space Industries - Космос для людей and North Caucasus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Сброс стилей и базовые настройки */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+            line-height: 1.6;
+            padding-top: 80px;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #0a3d2e 0%, #1a5c45 30%, #2d7d5d 70%, #3a9d73 100%);
+        }
+        
+        /* Премиальный фон с земной текстурой и ракетой */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                /* Земная текстура */
+                radial-gradient(circle at 20% 80%, rgba(26, 92, 69, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(58, 157, 115, 0.6) 0%, transparent 50%),
+                /* Тонкие линии для премиального вида */
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px);
+            z-index: -2;
+        }
+        
+        /* Стилизованная ракета на фоне */
+        .rocket-background {
+            position: fixed;
+            top: 50%;
+            right: -100px;
+            transform: translateY(-50%) rotate(15deg);
+            width: 400px;
+            height: 600px;
+            background: 
+                linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 200"><path fill="%23ffffff" opacity="0.1" d="M50,10 L70,50 L60,60 L70,70 L60,80 L70,90 L60,100 L70,110 L60,120 L70,130 L60,140 L70,150 L60,160 L30,160 L40,150 L30,140 L40,130 L30,120 L40,110 L30,100 L40,90 L30,80 L40,70 L30,60 L40,50 Z"/><circle cx="50" cy="170" r="20" fill="%23ffffff" opacity="0.05"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: -1;
+            opacity: 0.4;
+            animation: floatRocket 20s ease-in-out infinite;
+        }
+        
+        @keyframes floatRocket {
+            0%, 100% {
+                transform: translateY(-50%) rotate(15deg) translateX(0);
+            }
+            50% {
+                transform: translateY(-55%) rotate(15deg) translateX(-20px);
+            }
+        }
+        
+        /* Верхний фиксированный баннер - премиальный дизайн */
+        .top-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(10, 61, 46, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .top-banner h1 {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .top-banner h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3a9d73, transparent);
+        }
+        
+        /* Контейнер для основного контента */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Заголовок миссии */
+        .mission-header {
+            text-align: center;
+            margin-bottom: 60px;
+            color: white;
+        }
+        
+        .mission-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .mission-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* Секции с контентом - премиальный дизайн */
+        .content-section {
+            display: flex;
+            margin-bottom: 60px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0a3d2e, #3a9d73, #0a3d2e);
+        }
+        
+        .content-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .text-block, .image-block {
+            flex: 1;
+            padding: 40px;
+        }
+        
+        .text-block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .image-block {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(10, 61, 46, 0.05), rgba(58, 157, 115, 0.05));
+        }
+        
+        .content-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease;
+        }
+        
+        .content-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #0a3d2e;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #3a9d73;
+        }
+        
+        .section-text {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            line-height: 1.7;
+        }
+        
+        /* Контейнер для кнопок навигации */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+            padding: 0 20px;
+        }
+        
+        /* Стили для кнопок - премиальный дизайн */
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #07beec, #1a05d8);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 20px rgba(7, 190, 236, 0.5);
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s;
+        }
+        
+        .nav-button:hover::before {
+            left: 100%;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(7, 190, 236, 0.7), 0 0 30px rgba(7, 190, 236, 0.4);
+            background: linear-gradient(135deg, #1a05d8, #07beec);
+        }
+        
+        .nav-button:active {
+            transform: translateY(1px);
+        }
+        
+        /* Улучшенная кнопка с дополнительными эффектами */
+        .premium-button {
+            position: relative;
+            padding: 18px 45px;
+            background: linear-gradient(135deg, #07beec, #1a05d8, #07beec);
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite;
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            border-radius: 60px;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(7, 190, 236, 0.6), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+            overflow: hidden;
+            text-transform: uppercase;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .premium-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .premium-button:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .premium-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(7, 190, 236, 0.8), 
+                        0 0 40px rgba(7, 190, 236, 0.5),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            background: linear-gradient(135deg, #1a05d8, #07beec, #1a05d8);
+            background-size: 200% 200%;
+        }
+        
+        .premium-button:active {
+            transform: translateY(0) scale(1);
+            box-shadow: 0 5px 20px rgba(7, 190, 236, 0.6), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        .premium-button::after {
+            content: '☁';
+            margin-left: 12px;
+            font-size: 1.4rem;
+            transition: transform 0.4s ease;
+        }
+        
+        .premium-button:hover::after {
+            transform: translateY(-3px);
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Премиальный футер */
+        .premium-footer {
+            margin-top: 80px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .premium-footer p {
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .content-section {
+                flex-direction: column;
+            }
+            
+            .text-block, .image-block {
+                padding: 25px;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .nav-button, .premium-button {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .rocket-background {
+                display: none;
+            }
+            
+            .mission-header h2 {
+                font-size: 2rem;
+            }
+            
+            .premium-button {
+                padding: 16px 30px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Фоновая ракета -->
+    <div class="rocket-background"></div>
+    
+    <!-- Верхний фиксированный баннер высотой 80px -->
+    <header class="top-banner">
+        <h1>MK Space Industries</h1>
+    </header>
+    
+    <div class="container">
+        <!-- Заголовок миссии -->
+        <div class="mission-header">
+            <h2>Космические технологии для устойчивого будущего на Земли</h2>
+            <p>Используя достижения космической отрасли, мы создаем инновационные решения для улучшения жизни на нашей планете.</p>
+        </div>
+        
+        <!-- Первая секция: текст -->
+        <section class="content-section">
+            <div class="text-block">
+                <h2 class="section-title">Беспилотные автомобили</h2>
+                <p class="section-text">
+                Без спутникового интернета и спутниковых систем геолокации,
+                внедрение автомобилей, управляемых искусственным интеллектом, было бы слишом опасным
+                без систем точного геопозиционирования
+                </p>
+            </div>
+            <div class="image-block">
+                <!-- ЗАМЕНИТЕ ССЫЛКУ НИЖЕ НА ВАШЕ ИЗОБРАЖЕНИЕ #1 -->
+                <img src="https://avatars.mds.yandex.net/i?id=783fd2ec0376eeb33f635e174d447145_l-10233652-images-thumbs&n=13" 
+                     alt="Спутниковый мониторинг Земли" class="content-image">
+            </div>
+        </section>
+        
+        <!-- Вторая секция: изображение -->
+        <section class="content-section">
+            <div class="image-block">
+                <!-- ЗАМЕНИТЕ ССЫЛКУ НИЖЕ НА ВАШЕ ИЗОБРАЖЕНИЕ #2 -->
+                <img src="https://avatars.mds.yandex.net/i?id=e38081789ac1d9769e6c25621824750f_l-5150774-images-thumbs&n=13" 
+                     alt="Космические технологии в сельском хозяйстве" class="content-image">
+            </div>
+            <div class="text-block">
+                <h2 class="section-title">Борьба с лесными пожарами</h2>
+                <p class="section-text">
+                Спутники позволяют нам наблюдать за землёй на очень обширных расстояниях
+                таким образом, мы можем патрулировать обширные территории на точки возгорания лесных пожаров
+                что было бы очень сложно сделать с помощью беспилотных летательных аппаратов.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Третья секция: текст -->
+        <section class="content-section">
+            <div class="text-block">
+                <h2 class="section-title">Телефон для МЧС и моряков</h2>
+                <p class="section-text">
+                    всего 75 лет назад невозможно было представить себе телефон, которым можно пользоваться практически в любой точке мира
+                    но теперь это надежный инструмент для спасательных служб
+                    моряки и альпинисты МЧС.
+                </p>
+            </div>
+            <div class="image-block">
+                <!-- ЗАМЕНИТЕ ССЫЛКУ НИЖЕ НА ВАШЕ ИЗОБРАЖЕНИЕ #3 -->
+                <img src="https://avatars.mds.yandex.net/i?id=e38ee21fdfca903fa03bb22fc88c34766eb00b93-5238957-images-thumbs&n=13" 
+                     alt="Космические технологии в медицине" class="content-image">
+            </div>
+        </section>
+        
+        <!-- Четвертая секция: изображение -->
+        <section class="content-section">
+            <div class="image-block">
+                <!-- ЗАМЕНИТЕ ССЫЛКУ НИЖЕ НА ВАШЕ ИЗОБРАЖЕНИЕ #4 -->
+                <img src="https://avatars.mds.yandex.net/get-mpic/1930823/2a00000192043607c2a9df3564144391ddad/9hq" 
+                     alt="Будущее энергетики" class="content-image">
+            </div>
+            <div class="text-block">
+                <h2 class="section-title">Интернет</h2>
+                <p class="section-text">
+                 оставайтесь на связи и наслаждайтесь фильмами, мультфильмами, телешоу, играми и социальными сетями, не подключаясь к Wi-Fi.
+                 Благодаря спутниковому интернету вы можете получить доступ в Интернет от середины Атлантического океана до вершины горы Эверест
+                 все, что вам нужно, - это спутниковая тарелка которая поместится в рюкзак.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Кнопки навигации -->
+        <div class="button-container">
+            <a href="облака ру.hTML" class="premium-button">обратно к небу</a>
+        </div>
+        
+        <!-- Премиальный футер -->
+        <div class="premium-footer">
+            <p>MK Space Industries © 2025 | Космические технологии для устойчивого развития Земли</p>
+        </div>
+    </div>
+    
+    <script>
+        // Простой скрипт для добавления интерактивности
+        document.addEventListener('DOMContentLoaded', function() {
+            // Добавляем плавное появление секций при загрузке страницы
+            const sections = document.querySelectorAll('.content-section');
+            
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, 300 * index);
+            });
+            
+            // Параллакс эффект для фоновой ракеты
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const rocket = document.querySelector('.rocket-background');
+                if (rocket) {
+                    rocket.style.transform = `translateY(calc(-50% + ${scrolled * 0.1}px)) rotate(15deg)`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

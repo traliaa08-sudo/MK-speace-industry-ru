@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Технологии - MK Space Industries</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Сброс стилей и базовые настройки */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px 25px;
+        }
+        
+        /* Заголовок секции */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Контейнер для плиток */
+        .tiles-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(315px, 1fr));
+            gap: 25px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Стили плитки */
+        .tech-tile {
+            height: 500px;
+            background: rgba(20, 20, 20, 0.8);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tech-tile:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Заголовок технологии */
+        .tech-title {
+            padding: 25px 25px 15px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #fff;
+            position: relative;
+        }
+        
+        .tech-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 25px;
+            width: 40px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Контейнер для изображения */
+        .image-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 25px;
+            overflow: hidden;
+        }
+        
+        .tech-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.5s ease;
+        }
+        
+        .tech-tile:hover .tech-image {
+            transform: scale(1.03);
+        }
+        
+        /* Прогресс-бар */
+        .progress-section {
+            padding: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #d4af37, #f7ef8a);
+            border-radius: 2px;
+            transition: width 1.5s ease;
+            width: 0%;
+        }
+        
+        /* Особый стиль для завершенного проекта */
+        .completed .progress-fill {
+            background: linear-gradient(90deg, #00ff88, #00cc66);
+            width: 100%;
+        }
+        
+        .completed .progress-label span:last-child {
+            color: #00ff88;
+        }
+        
+        /* Голубой стиль для второй плитки */
+        .blue-progress .progress-fill {
+            background: linear-gradient(90deg, #00bfff, #1e90ff);
+        }
+        
+        .blue-progress .progress-label span:last-child {
+            color: #00bfff;
+        }
+        
+        /* Красный стиль для последней плитки */
+        .red-progress .progress-fill {
+            background: linear-gradient(90deg, #ff4444, #cc0000);
+        }
+        
+        .red-progress .progress-label span:last-child {
+            color: #ff4444;
+        }
+        
+        /* Декоративные элементы */
+        .corner-decoration {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .corner-tl {
+            top: 15px;
+            left: 15px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .corner-tr {
+            top: 15px;
+            right: 15px;
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .corner-bl {
+            bottom: 15px;
+            left: 15px;
+            border-right: none;
+            border-top: none;
+        }
+        
+        .corner-br {
+            bottom: 15px;
+            right: 15px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        /* Кнопка связи */
+        .connection-button {
+            display: block;
+            margin: 60px auto 0;
+            padding: 16px 40px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            text-align: center;
+            max-width: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .connection-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.7s;
+        }
+        
+        .connection-button:hover::before {
+            left: 100%;
+        }
+        
+        .connection-button:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Анимация появления */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .tiles-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            body {
+                padding: 25px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="section-header">
+        <h1 class="section-title">Ваши планы</h1>
+        <p class="section-subtitle">передовые разработки, определяющие будущее космической отрасли</p>
+    </div>
+    
+    <div class="tiles-container">
+        <!-- Плитка 1 - Завершенная -->
+        <div class="tech-tile completed" style="animation: fadeInUp 0.6s ease 0.1s both;">
+            <div class="corner-decoration corner-tl"></div>
+            <div class="corner-decoration corner-tr"></div>
+            <h3 class="tech-title">создание веб-сайта</h3>
+            <div class="image-container">
+                <img src="https://i.pinimg.com/736x/cc/98/12/cc9812ea7a28a3eabec2820072a074f4.jpg" alt="website creation" class="tech-image">
+            </div>
+            <div class="progress-section">
+                <div class="progress-label">
+                    <span>Завершенный</span>
+                    <span>100%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+            <div class="corner-decoration corner-bl"></div>
+            <div class="corner-decoration corner-br"></div>
+        </div>
+        
+        <!-- Плитка 2 - Голубой прогресс-бар -->
+        <div class="tech-tile blue-progress" style="animation: fadeInUp 0.6s ease 0.2s both;">
+            <div class="corner-decoration corner-tl"></div>
+            <div class="corner-decoration corner-tr"></div>
+            <h3 class="tech-title">Первая ракета</h3>
+            <div class="image-container">
+                <img src="https://kia-soft.narod.ru/interests/rockets/rk2/motor/calc/scheme.jpg" alt="The first rocket" class="tech-image">
+            </div>
+            <div class="progress-section">
+                <div class="progress-label">
+                    <span>в процессе</span>
+                    <span>75%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-progress="75"></div>
+                </div>
+            </div>
+            <div class="corner-decoration corner-bl"></div>
+            <div class="corner-decoration corner-br"></div>
+        </div>
+        
+        <!-- Плитка 3 -->
+        <div class="tech-tile" style="animation: fadeInUp 0.6s ease 0.3s both;">
+            <div class="corner-decoration corner-tl"></div>
+            <div class="corner-decoration corner-tr"></div>
+            <h3 class="tech-title">Программное обеспечение</h3>
+            <div class="image-container">
+                <img src="https://infostart.ru/upload/iblock/6c3/6c332f5bb576d48d9521a71e01d2e5e0.jpg" alt="software" class="tech-image">
+            </div>
+            <div class="progress-section">
+                <div class="progress-label">
+                    <span>в процессе</span>
+                    <span>45%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-progress="45"></div>
+                </div>
+            </div>
+            <div class="corner-decoration corner-bl"></div>
+            <div class="corner-decoration corner-br"></div>
+        </div>
+        
+        <!-- Плитка 4 -->
+        <div class="tech-tile" style="animation: fadeInUp 0.6s ease 0.4s both;">
+            <div class="corner-decoration corner-tl"></div>
+            <div class="corner-decoration corner-tr"></div>
+            <h3 class="tech-title">Искуственный Интелект</h3>
+            <div class="image-container">
+                <img src="https://avatars.mds.yandex.net/i?id=6a1cc2e57df64e1ef5bbb83bd022da90_l-4809949-images-thumbs&n=13" alt="Artificial intelligence" class="tech-image">
+            </div>
+            <div class="progress-section">
+                <div class="progress-label">
+                    <span>в процессе</span>
+                    <span>38%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-progress="38"></div>
+                </div>
+            </div>
+            <div class="corner-decoration corner-bl"></div>
+            <div class="corner-decoration corner-br"></div>
+        </div>
+        
+        <!-- Плитка 5 -->
+        <div class="tech-tile" style="animation: fadeInUp 0.6s ease 0.5s both;">
+            <div class="corner-decoration corner-tl"></div>
+            <div class="corner-decoration corner-tr"></div>
+            <h3 class="tech-title">ракетный пулемёт на 3д-принтере</h3>
+            <div class="image-container">
+                <img src="https://avatars.mds.yandex.net/i?id=c75f3f4b28ed7fcdd14e526279dbb2565ed33f83-5541872-images-thumbs&n=13" alt="3D-printed rocket gun" class="tech-image">
+            </div>
+            <div class="progress-section">
+                <div class="progress-label">
+                    <span>В процессе</span>
+                    <span>25%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-progress="25"></div>
+                </div>
+            </div>
+            <div class="corner-decoration corner-bl"></div>
+            <div class="corner-decoration corner-br"></div>
+        </div>
+        
+        <!-- Плитка 6 -->
+        <div class="tech-tile" style="animation: fadeInUp 0.6s ease 0.6s both;">
+            <div class="corner-decoration corner-tl"></div>
+            <div class="corner-decoration corner-tr"></div>
+            <h3 class="tech-title">Ракета "Сайхат"</h3>
+            <div class="image-container">
+                <img src="https://avatars.mds.yandex.net/i?id=9a88c002cd85389143aa56f3cfb0526f256f7ba3-5167445-images-thumbs&n=13" alt="The Saikar rocket" class="tech-image">
+            </div>
+            <div class="progress-section">
+                <div class="progress-label">
+                    <span>в разработке</span>
+                    <span>0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-progress="0"></div>
+                </div>
+            </div>
+            <div class="corner-decoration corner-bl"></div>
+            <div class="corner-decoration corner-br"></div>
+        </div>
+        
+        <!-- Плитка 7 -->
+        <div class="tech-tile" style="animation: fadeInUp 0.6s ease 0.7s both;">
+            <div class="corner-decoration corner-tl"></div>
+            <div class="corner-decoration corner-tr"></div>
+            <h3 class="tech-title">Стартовая центрифуга</h3>
+            <div class="image-container">
+                <img src="https://avatars.mds.yandex.net/i?id=3319e20393ed1be093ed734023625e8ab9729fdc-5386023-images-thumbs&n=13" alt="The centrifuge to start" class="tech-image">
+            </div>
+            <div class="progress-section">
+                <div class="progress-label">
+                    <span>В разработке</span>
+                    <span>0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-progress="0"></div>
+                </div>
+            </div>
+            <div class="corner-decoration corner-bl"></div>
+            <div class="corner-decoration corner-br"></div>
+        </div>
+        
+        <!-- Плитка 8 -->
+        <div class="tech-tile" style="animation: fadeInUp 0.6s ease 0.8s both;">
+            <div class="corner-decoration corner-tl"></div>
+            <div class="corner-decoration corner-tr"></div>
+            <h3 class="tech-title">Ракета "КАМА"</h3>
+            <div class="image-container">
+                <img src="https://img5tv.cdnvideo.ru/webp/shared/files/202406/1_2019704.jpg" alt="The KAMA rocket" class="tech-image">
+            </div>
+            <div class="progress-section">
+                <div class="progress-label">
+                    <span>В разработке</span>
+                    <span>0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-progress="0"></div>
+                </div>
+            </div>
+            <div class="corner-decoration corner-bl"></div>
+            <div class="corner-decoration corner-br"></div>
+        </div>
+        
+        <!-- Плитка 9 - Красный прогресс-бар на 10% -->
+        <div class="tech-tile red-progress" style="animation: fadeInUp 0.6s ease 0.9s both;">
+            <div class="corner-decoration corner-tl"></div>
+            <div class="corner-decoration corner-tr"></div>
+            <h3 class="tech-title">скретный проект "СКАРАБЕЙ"</h3>
+            <div class="image-container">
+                <img src="https://avatars.mds.yandex.net/i?id=0c06b328629e9180bc0631e543438fe4f586e1ce-4589529-images-thumbs&n=13" alt="The SCARAB Project" class="tech-image">
+            </div>
+            <div class="progress-section">
+                <div class="progress-label">
+                    <span>В процессе</span>
+                    <span>10%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-progress="10"></div>
+                </div>
+            </div>
+            <div class="corner-decoration corner-bl"></div>
+            <div class="corner-decoration corner-br"></div>
+        </div>
+        
+        <!-- Новая плитка 10 - Atomic Heart -->
+        <div class="tech-tile" style="animation: fadeInUp 0.6s ease 1.0s both;">
+            <div class="corner-decoration corner-tl"></div>
+            <div class="corner-decoration corner-tr"></div>
+            <h3 class="tech-title">Атомное сердце</h3>
+            <div class="image-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Pratt_%26_Whitney_F100_F-15_engine_undergoing_testing.jpg/1200px-Pratt_%26_Whitney_F100_F-15_engine_undergoing_testing.jpg" alt="Atomic Heart" class="tech-image">
+            </div>
+            <div class="progress-section">
+                <div class="progress-label">
+                    <span>В разработке</span>
+                    <span>0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-progress="0"></div>
+                </div>
+            </div>
+            <div class="corner-decoration corner-bl"></div>
+            <div class="corner-decoration corner-br"></div>
+        </div>
+        
+        <!-- Новая плитка 11 - Satellite Network -->
+        <div class="tech-tile" style="animation: fadeInUp 0.6s ease 1.1s both;">
+            <div class="corner-decoration corner-tl"></div>
+            <div class="corner-decoration corner-tr"></div>
+            <h3 class="tech-title">спутниковая группировка</h3>
+            <div class="image-container">
+                <img src="https://avatars.mds.yandex.net/i?id=7a72bf51f02c5bdc0da3145e900ec483_l-5257239-images-thumbs&n=13" alt="Satellite Network" class="tech-image">
+            </div>
+            <div class="progress-section">
+                <div class="progress-label">
+                    <span>В разработке</span>
+                    <span>0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-progress="0"></div>
+                </div>
+            </div>
+            <div class="corner-decoration corner-bl"></div>
+            <div class="corner-decoration corner-br"></div>
+        </div>
+    </div>
+
+    <!-- Кнопка связи с переходом на связь.html -->
+    <a href="регистрация связ ру.html" class="connection-button">Связи</a>
+
+    <script>
+        // Добавляем интерактивность для плиток
+        document.querySelectorAll('.tech-tile').forEach(tile => {
+            // Эффект при наведении
+            tile.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+                this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.5)';
+                this.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+            });
+            
+            tile.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = 'none';
+                this.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+            });
+        });
+        
+        // Анимация появления плиток при загрузке
+        window.addEventListener('load', function() {
+            document.querySelectorAll('.tech-tile').forEach((tile, index) => {
+                tile.style.animation = `fadeInUp 0.6s ease ${0.1 + index * 0.1}s both`;
+            });
+            
+            // Анимация прогресс-бара для завершенной плитки
+            const completedTile = document.querySelector('.completed');
+            if (completedTile) {
+                const progressFill = completedTile.querySelector('.progress-fill');
+                progressFill.style.width = '0';
+                setTimeout(() => {
+                    progressFill.style.transition = 'width 1.5s ease';
+                    progressFill.style.width = '100%';
+                }, 800);
+            }
+            
+            // Анимация прогресс-баров для плиток с процентами
+            document.querySelectorAll('.progress-fill[data-progress]').forEach(fill => {
+                const progress = parseInt(fill.getAttribute('data-progress'));
+                if (progress > 0) {
+                    fill.style.width = '0';
+                    setTimeout(() => {
+                        fill.style.transition = 'width 1.5s ease';
+                        fill.style.width = progress + '%';
+                    }, 1000 + Math.random() * 500);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

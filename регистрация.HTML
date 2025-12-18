@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация - Премиум Доступ</title>
+    <style>
+        /* Сброс стилей и базовые настройки */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #000;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(40, 40, 40, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(60, 60, 60, 0.6) 0%, transparent 50%),
+                linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
+        }
+        
+        /* Контейнер формы */
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            background: rgba(10, 10, 10, 0.9);
+            border-radius: 2px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        /* Элегантная верхняя линия */
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+        }
+        
+        /* Заголовок */
+        .login-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: normal;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            color: #fff;
+            text-transform: uppercase;
+            position: relative;
+        }
+        
+        .login-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Поля ввода */
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 1px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-input:focus {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(30, 30, 30, 0.8);
+        }
+        
+        /* Кнопка проверки */
+        .verify-btn {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1rem;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .verify-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .verify-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .verify-btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Кнопка назад */
+        .back-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .back-btn:hover {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        /* Сообщение об ошибке */
+        .error-message {
+            color: #d4af37;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            min-height: 20px;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+                margin: 0 15px;
+            }
+            
+            .login-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1 class="login-title">Registration</h1>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <label class="input-label">LOGIN</label>
+                <input type="text" class="form-input" id="username" placeholder="Введите ваш логин" required>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">password</label>
+                <input type="password" class="form-input" id="password" placeholder="Введите ваш пароль" required>
+            </div>
+            
+            <button type="submit" class="verify-btn">Check</button>
+            
+            <div class="error-message" id="errorMessage"></div>
+        </form>
+        
+        <a href="javascript:history.back()" class="back-btn">Back</a>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Проверка логина и пароля
+            if (username === 'Moses' && password === '2007') {
+                // Перенаправление на следующую страницу
+                window.location.href = 'приветствие.HTML';
+            } else {
+                errorMessage.textContent = 'Неверный логин или пароль';
+                
+                // Анимация ошибки
+                errorMessage.style.opacity = '0';
+                setTimeout(() => {
+                    errorMessage.style.transition = 'opacity 0.3s ease';
+                    errorMessage.style.opacity = '1';
+                }, 10);
+                
+                // Очистка полей
+                document.getElementById('password').value = '';
+            }
+        });
+        
+        // Добавляем эффект при фокусе на полях ввода
+        const inputs = document.querySelectorAll('.form-input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.querySelector('.input-label').style.color = 'rgba(255, 255, 255, 0.9)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.querySelector('.input-label').style.color = 'rgba(255, 255, 255, 0.7)';
+            });
+        });
+    </script>
+</body>
+</html>
